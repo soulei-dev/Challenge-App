@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import Copyright from "../components/Copyright";
 
 const MealList = (props) => {
   return (
@@ -9,6 +10,7 @@ const MealList = (props) => {
         title="Go to Meal Detail"
         onPress={() => props.navigation.navigate("MealDetail")}
       />
+      <Copyright />
     </View>
   );
 };
