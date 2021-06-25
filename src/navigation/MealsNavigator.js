@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Linking } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import * as Screens from "../screens/index";
@@ -12,7 +12,9 @@ const NavStack = createStackNavigator();
 const ContactStack = createStackNavigator();
 
 const NavStackScreen = ({ navigation }) => (
-  <NavStack.Navigator>
+  <NavStack.Navigator
+    screenOptions={{ headerStyle: { backgroundColor: "transparent" } }}
+  >
     <NavStack.Screen
       name="MealList"
       component={Screens.MealList}
@@ -50,16 +52,26 @@ const NavStackScreen = ({ navigation }) => (
 );
 
 const ContactStackScreen = () => (
-  <ContactStack.Navigator>
+  <ContactStack.Navigator
+    screenOptions={{ headerStyle: { backgroundColor: "transparent" } }}
+  >
     <ContactStack.Screen name="Contact" component={Screens.Contact} />
   </ContactStack.Navigator>
 );
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "white",
+  },
+};
+
 const MealsNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <Drawer.Navigator
-        drawerType="front"
+        drawerType="back"
         drawerContent={(props) => <CustomSidebarMenu {...props} />}
         drawerStyle={{ width: 200 }}
         navigationOptions={{ header: null }}
