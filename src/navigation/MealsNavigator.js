@@ -4,7 +4,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import * as Screens from "../screens/index";
-import { FontAwesome5, AntDesign } from "@expo/vector-icons";
+import { FontAwesome5, AntDesign, Ionicons } from "@expo/vector-icons";
 import CustomSidebarMenu from "../components/CustomSidebarMenu";
 
 const Drawer = createDrawerNavigator();
@@ -25,7 +25,7 @@ const NavStackScreen = ({ navigation }) => (
             onPress={() => navigation.openDrawer()}
             style={{ marginHorizontal: 10 }}
           >
-            <FontAwesome5 name="hamburger" size={25} color="black" />
+            <FontAwesome5 name="hamburger" size={25} color="#ff8900" />
           </TouchableOpacity>
         ),
         headerRight: () => (
@@ -46,7 +46,20 @@ const NavStackScreen = ({ navigation }) => (
     <NavStack.Screen
       name="MealDetail"
       component={Screens.MealDetail}
-      options={{ title: "Meal Detail" }}
+      options={{
+        title: "Meal Detail",
+        headerTransparent: true,
+        headerTitle: false,
+        headerBackTitleVisible: false,
+        headerBackImage: () => (
+          <Ionicons
+            name="arrow-back-circle"
+            size={30}
+            color="#ff8900"
+            style={{ marginLeft: 20 }}
+          />
+        ),
+      }}
     />
   </NavStack.Navigator>
 );

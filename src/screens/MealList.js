@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, FlatList } from "react-native";
 import Copyright from "../components/Copyright";
 import useAxios from "../../hooks/useAxios";
@@ -6,23 +6,31 @@ import SearchInput from "../components/SearchInput";
 import MealGrid from "../components/MealGrid";
 
 const MealList = (props) => {
+  const [data, setData] = useState([]);
+
   const { response, error, loading } = useAxios({
     method: "GET",
-    url: "/search.php?f=a",
+    url: "/search.php?f=b",
   });
 
-  const renderGridItem = (itemData) => {
+  useEffect(() => {
+    if (response !== null) {
+      setData(response.meals);
+    }
+  }, [response]);
+
+  const renderGridItem = ({ item }) => {
     return (
       <MealGrid
-        title={itemData.item.strMeal}
-        image={itemData.item.strMealThumb}
-        area={itemData.item.strArea}
-        tags={itemData.item.strTags}
-        ingredients={itemData.item.strIngredient}
+        title={item.strMeal}
+        image={item.strMealThumb}
+        area={item.strArea}
+        tags={item.strTags}
+        ingredients={item.strIngredient1}
         onSelect={() =>
-          navigation.navigate("MealDetail", {
-            idMeal: itemData.item.idMeal,
-            data: response,
+          props.navigation.navigate("MealDetail", {
+            idMeal: item.idMeal,
+            data: data,
           })
         }
       />
@@ -34,25 +42,21 @@ const MealList = (props) => {
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        <View>
+        <View style={{ flex: 1, marginTop: 50 }}>
           {error && error.message}
-          {response && (
+          {data && (
             <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
               keyExtractor={(item, index) => item.idMeal}
-              data={response.meals}
+              data={data}
               renderItem={renderGridItem}
             />
           )}
+          <Copyright />
         </View>
       )}
-      <Button
-        title="Go to Meal Detail"
-        onPress={() => props.navigation.navigate("MealDetail")}
-      />
-      <Copyright />
     </View>
   );
 };

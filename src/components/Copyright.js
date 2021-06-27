@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 const Copyright = () => {
   return (
@@ -10,17 +10,17 @@ const Copyright = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 20,
-    alignItems: "center",
-  },
   labelStyle: {
     fontSize: 11,
     fontWeight: "600",
     textAlign: "center",
+  },
+  container: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 5,
+    alignItems: "center",
   },
 });
 
