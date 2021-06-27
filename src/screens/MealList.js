@@ -21,6 +21,7 @@ const MealList = (props) => {
     }
   }, [response]);
 
+  // ** Search function to filtered list of meals ** //
   const search = (searchText) => {
     setSearchText(searchText);
 
@@ -47,6 +48,7 @@ const MealList = (props) => {
   };
   return (
     <View style={styles.container}>
+      {/* Search Input */}
       <SearchInput
         placeholder="Search Meal"
         onChangeText={search}
@@ -57,8 +59,9 @@ const MealList = (props) => {
       ) : (
         <View style={{ flex: 1, marginTop: 50 }}>
           {error && error.message}
+          {/* Component to render a list of meals */}
           {data && (
-            <FlatList
+            <FlatListÒ
               horizontal
               showsHorizontalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"

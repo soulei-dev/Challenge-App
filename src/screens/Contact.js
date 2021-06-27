@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+// Function to contact validation
 const contactValidationSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup
@@ -38,7 +39,7 @@ const Contact = () => {
               style={styles.logo}
             />
           </View>
-          {/* Input */}
+          {/* Inputs content */}
           <View style={{ alignItems: "center" }}>
             <Input
               placeholder="Name"
@@ -70,6 +71,7 @@ const Contact = () => {
             {errors.message && touched.message && (
               <Text style={styles.errors}>{errors.message}</Text>
             )}
+            {/* Submit button */}
             <Button
               title="Submit"
               onPress={handleSubmit}
@@ -77,6 +79,7 @@ const Contact = () => {
               disabled={!isValid}
             />
           </View>
+          {/* Footer */}
           <Copyright />
         </View>
       )}

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet, Image, Text, ScrollView } from "react-native";
 import Copyright from "../components/Copyright";
 import useAxios from "../../hooks/useAxios";
 
-function ingredientsToListItems(recipe) {
+// Function to list ingredients items
+const ingredientsToListItems = (recipe) => {
   // default strIngredient 1 to 20
   const ingredients = [];
 
@@ -36,7 +30,7 @@ function ingredientsToListItems(recipe) {
   }
 
   return ingredients;
-}
+};
 
 const MealDetail = ({ route }) => {
   const { data, idMeal } = route.params;
@@ -58,6 +52,7 @@ const MealDetail = ({ route }) => {
     return null;
   }
 
+  //   list of ingredients
   const ingredients = ingredientsToListItems(recipe);
 
   const { strMeal, strMealThumb, strArea, strCategory, strInstructions } =
@@ -112,6 +107,7 @@ const MealDetail = ({ route }) => {
           </View>
         </View>
         <View style={{ marginTop: 20 }}>
+          {/* Footer */}
           <Copyright />
         </View>
       </ScrollView>
