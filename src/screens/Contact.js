@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Button,
-  Text,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Image, Button, Text } from "react-native";
 import Copyright from "../components/Copyright";
 import Input from "../components/Input";
 import { Formik } from "formik";
@@ -39,53 +32,51 @@ const Contact = () => {
         isValid,
       }) => (
         <View style={styles.container}>
-          <ScrollView>
-            <View>
-              <Image
-                source={require("../../assets/images/undraw_contact_us_15o2.png")}
-                style={styles.logo}
-              />
-            </View>
-            {/* Input */}
-            <View style={{ alignItems: "center" }}>
-              <Input
-                placeholder="Name"
-                label="Name"
-                onChangeText={handleChange("name")}
-                onBlur={handleBlur("name")}
-                value={values.name}
-              />
-              {errors.name && touched.name && (
-                <Text style={styles.errors}>{errors.name}</Text>
-              )}
-              <Input
-                placeholder="Email"
-                label="Email"
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                value={values.email}
-              />
-              {errors.email && touched.email && (
-                <Text style={styles.errors}>{errors.email}</Text>
-              )}
-              <Input
-                placeholder="Message"
-                label="Message"
-                onChangeText={handleChange("message")}
-                onBlur={handleBlur("message")}
-                value={values.message}
-              />
-              {errors.message && touched.message && (
-                <Text style={styles.errors}>{errors.message}</Text>
-              )}
-              <Button
-                title="Submit"
-                onPress={handleSubmit}
-                rounded
-                disabled={!isValid}
-              />
-            </View>
-          </ScrollView>
+          <View>
+            <Image
+              source={require("../../assets/images/undraw_contact_us_15o2.png")}
+              style={styles.logo}
+            />
+          </View>
+          {/* Input */}
+          <View style={{ alignItems: "center" }}>
+            <Input
+              placeholder="Name"
+              label="Name"
+              onChangeText={handleChange("name")}
+              onBlur={handleBlur("name")}
+              value={values.name}
+            />
+            {errors.name && touched.name && (
+              <Text style={styles.errors}>{errors.name}</Text>
+            )}
+            <Input
+              placeholder="Email"
+              label="Email"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+            />
+            {errors.email && touched.email && (
+              <Text style={styles.errors}>{errors.email}</Text>
+            )}
+            <Input
+              placeholder="Message"
+              label="Message"
+              onChangeText={handleChange("message")}
+              onBlur={handleBlur("message")}
+              value={values.message}
+            />
+            {errors.message && touched.message && (
+              <Text style={styles.errors}>{errors.message}</Text>
+            )}
+            <Button
+              title="Submit"
+              onPress={handleSubmit}
+              rounded
+              disabled={!isValid}
+            />
+          </View>
           <Copyright />
         </View>
       )}

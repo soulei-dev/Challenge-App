@@ -7,6 +7,8 @@ import MealGrid from "../components/MealGrid";
 
 const MealList = (props) => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const { response, error, loading } = useAxios({
     method: "GET",
@@ -18,6 +20,13 @@ const MealList = (props) => {
       setData(response.meals);
     }
   }, [response]);
+
+  const search = (searchText) => {
+    setSearchText(searchText);
+
+    let filteredData = data.filter((item) => item.strMeal.includes(searchText));
+    setFilteredData(filteredData);
+  };
 
   const renderGridItem = ({ item }) => {
     return (
@@ -38,7 +47,11 @@ const MealList = (props) => {
   };
   return (
     <View style={styles.container}>
-      <SearchInput placeholder="Search Meal" />
+      <SearchInput
+        placeholder="Search Meal"
+        onChangeText={search}
+        value={searchText}
+      />
       {loading ? (
         <Text>Loading...</Text>
       ) : (
@@ -50,7 +63,9 @@ const MealList = (props) => {
               showsHorizontalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
               keyExtractor={(item, index) => item.idMeal}
-              data={data}
+              data={
+                filteredData && filteredData.length > 0 ? filteredData : data
+              }
               renderItem={renderGridItem}
             />
           )}
