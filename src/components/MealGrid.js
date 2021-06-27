@@ -63,7 +63,7 @@ const MealGrid = ({ title, onSelect, image, area, tags, ingredients }) => {
               </Text>
             </View>
             <View style={{ flex: 1, marginBottom: 20 }}>
-              <Text>Ingredient: {ingredients}</Text>
+              <Text>Ingredient: {ingredients.length}</Text>
             </View>
             <View
               style={{
