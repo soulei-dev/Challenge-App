@@ -1,9 +1,10 @@
 import React from "react";
-import { View, StyleSheet, Image, Button, Text } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import Copyright from "../components/Copyright";
 import Input from "../components/Input";
 import { Formik } from "formik";
 import * as yup from "yup";
+import styled from "styled-components";
 
 // Function to contact validation
 const contactValidationSchema = yup.object().shape({
@@ -34,9 +35,8 @@ const Contact = () => {
       }) => (
         <View style={styles.container}>
           <View>
-            <Image
+            <Logo
               source={require("../../assets/images/undraw_contact_us_15o2.png")}
-              style={styles.logo}
             />
           </View>
           {/* Inputs content */}
@@ -48,9 +48,7 @@ const Contact = () => {
               onBlur={handleBlur("name")}
               value={values.name}
             />
-            {errors.name && touched.name && (
-              <Text style={styles.errors}>{errors.name}</Text>
-            )}
+            {errors.name && touched.name && <Errors>{errors.name}</Errors>}
             <Input
               placeholder="Email"
               label="Email"
@@ -58,9 +56,7 @@ const Contact = () => {
               onBlur={handleBlur("email")}
               value={values.email}
             />
-            {errors.email && touched.email && (
-              <Text style={styles.errors}>{errors.email}</Text>
-            )}
+            {errors.email && touched.email && <Errors>{errors.email}</Errors>}
             <Input
               placeholder="Message"
               label="Message"
@@ -69,7 +65,7 @@ const Contact = () => {
               value={values.message}
             />
             {errors.message && touched.message && (
-              <Text style={styles.errors}>{errors.message}</Text>
+              <Errors>{errors.message}</Errors>
             )}
             {/* Submit button */}
             <Button
@@ -87,19 +83,21 @@ const Contact = () => {
   );
 };
 
+const Errors = styled.Text`
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 5px;
+`;
+
+const Logo = styled.Image`
+  width: 390px;
+  height: 290px;
+`;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  logo: {
-    width: 390,
-    height: 290,
-  },
-  errors: {
-    color: "red",
-    fontSize: 12,
-    fontWeight: "bold",
-    marginTop: 5,
   },
 });
 

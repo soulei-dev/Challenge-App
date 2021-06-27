@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, Text, ScrollView } from "react-native";
+import { View, Image, Text, ScrollView } from "react-native";
 import Copyright from "../components/Copyright";
 import useAxios from "../../hooks/useAxios";
+import styled from "styled-components";
 
 // Function to list ingredients items
 const ingredientsToListItems = (recipe) => {
@@ -24,7 +25,7 @@ const ingredientsToListItems = (recipe) => {
             fontWeight: "bold",
             fontSize: 12,
           }}
-        >{`● ${ingr} - ${measure}`}</Text>
+        >{`• ${ingr} - ${measure}`}</Text>
       </View>
     );
   }
@@ -59,16 +60,9 @@ const MealDetail = ({ route }) => {
     selectedMeal;
 
   return (
-    <View style={styles.screen}>
+    <Screen>
       {/* Header */}
-      <View
-        style={{
-          backgroundColor: "#fff2e3",
-          height: 420,
-          borderBottomRightRadius: 20,
-          borderBottomLeftRadius: 20,
-        }}
-      >
+      <Header>
         <Image
           source={{ uri: strMealThumb }}
           style={{
@@ -79,28 +73,31 @@ const MealDetail = ({ route }) => {
           }}
         />
         <View style={{ margin: 10 }}>
-          <Text style={styles.screenTitle}>{strMeal}</Text>
+          <Title>{strMeal}</Title>
           <View style={{ flexDirection: "row", marginTop: 5 }}>
-            <View style={styles.areaStyle}>
-              <Text style={styles.areaLabel}>{strArea}</Text>
-            </View>
-            <View style={styles.areaStyle}>
-              <Text style={styles.categoryLabel}>{strCategory}</Text>
-            </View>
+            <Area>
+              <AreaLabel>{strArea}</AreaLabel>
+            </Area>
+            <Area>
+              <CategoryLabel>{strCategory}</CategoryLabel>
+            </Area>
           </View>
         </View>
-      </View>
+      </Header>
       {/* Content */}
-      <ScrollView style={{ marginBottom: 5 }}>
+      <ScrollView
+        style={{ marginBottom: 5 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={{ margin: 10 }}>
           {/* Ingredients */}
           <View style={{ marginBottom: 10 }}>
-            <Text style={styles.contentTitle}>Ingredients</Text>
+            <ContentTitle>Ingredients</ContentTitle>
           </View>
           {ingredients}
           {/* Instructions */}
           <View style={{ marginBottom: 10 }}>
-            <Text style={styles.contentTitle}>Instructions</Text>
+            <ContentTitle>Instructions</ContentTitle>
           </View>
           <View>
             <Text>{strInstructions}</Text>
@@ -111,54 +108,51 @@ const MealDetail = ({ route }) => {
           <Copyright />
         </View>
       </ScrollView>
-    </View>
+    </Screen>
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-  image: {
-    width: "100%",
-    height: 300,
-  },
-  container: {
-    backgroundColor: "white",
-    width: "100%",
-    height: "100%",
-    marginTop: 300,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-  },
-  screenTitle: {
-    fontWeight: "800",
-    fontSize: 15,
-  },
-  areaStyle: {
-    width: 80,
-    height: 20,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#ededed",
-    borderRadius: 10,
-    marginBottom: 10,
-    marginRight: 10,
-  },
-  areaLabel: {
-    textAlign: "center",
-    fontWeight: "600",
-    color: "#ff8900",
-  },
-  categoryLabel: {
-    textAlign: "center",
-    fontWeight: "600",
-    color: "#ff2e51",
-  },
-  contentTitle: {
-    fontWeight: "600",
-    fontSize: 20,
-  },
-});
+const Header = styled.View`
+  background-color: #fff2e3;
+  height: 420px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+`;
+
+const Title = styled.Text`
+  font-weight: 800;
+  font-size: 15px;
+`;
+
+const Area = styled.View`
+  width: 80px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+`;
+
+const AreaLabel = styled.Text`
+  text-align: center;
+  font-weight: 600;
+  color: #ff8900;
+`;
+
+const CategoryLabel = styled.Text`
+  text-align: center;
+  font-weight: 600;
+  color: #ff2e51;
+`;
+
+const ContentTitle = styled.Text`
+  font-weight: 600;
+  font-size: 20px;
+`;
+
+const Screen = styled.View`
+  flex: 1;
+`;
 
 export default MealDetail;

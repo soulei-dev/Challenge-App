@@ -1,77 +1,26 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  ImageBackground,
-  Text,
-  View,
-  StyleSheet,
-} from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
+import styled from "styled-components";
 
 const MealGrid = ({ title, onSelect, image, area, tags, ingredients }) => {
-  const { gridItem, imageContainer } = styles;
   return (
-    <View style={gridItem}>
+    <View style={{ flex: 1, margin: 10, height: 160 }}>
       <TouchableOpacity onPress={onSelect}>
-        <ImageBackground
+        <ImageContainer
           imageStyle={{ borderRadius: 10 }}
-          style={imageContainer}
           source={{ uri: image }}
         >
-          <View
-            style={{
-              backgroundColor: "white",
-              borderWidth: 1,
-              borderColor: "#ededed",
-              borderRadius: 10,
-              padding: 10,
-              width: 230,
-              height: 180,
-              top: 140,
-              shadowColor: "black",
-              shadowOpacity: 0.1,
-              shadowOffset: { width: 0, height: 1 },
-              shadowRadius: 5,
-            }}
-          >
-            <View
-              style={{
-                flexWrap: "wrap",
-                flexDirection: "row",
-                marginBottom: 5,
-              }}
-            >
+          <Container>
+            <TitleContainer>
               <Text style={{ fontWeight: "800" }}>{title}</Text>
-            </View>
-            <View
-              style={{
-                justifyContent: "center",
-                width: 100,
-                height: 20,
-                backgroundColor: "#ffda9c",
-                borderRadius: 10,
-                marginBottom: 10,
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "600",
-                  color: "#ffa44a",
-                  textAlign: "center",
-                }}
-              >
-                {area}
-              </Text>
-            </View>
+            </TitleContainer>
+            <Header>
+              <Area>{area}</Area>
+            </Header>
             <View style={{ flex: 1, marginBottom: 20 }}>
               <Text>Ingredient: {ingredients.length}</Text>
             </View>
-            <View
-              style={{
-                flex: 2,
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
+            <TagsContainer>
               {tags ? (
                 <View style={{}}>
                   <Text
@@ -84,38 +33,70 @@ const MealGrid = ({ title, onSelect, image, area, tags, ingredients }) => {
                   </Text>
                 </View>
               ) : (
-                <View
-                  style={{
-                    flex: 1,
-                    top: 15,
-                    marginTop: 5,
-                    alignItems: "center",
-                  }}
-                >
+                <NoTag>
                   <Text>No Tag</Text>
-                </View>
+                </NoTag>
               )}
-            </View>
-          </View>
-        </ImageBackground>
+            </TagsContainer>
+          </Container>
+        </ImageContainer>
       </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  imageContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 10,
-    width: 250,
-    height: 350,
-  },
-  gridItem: {
-    flex: 1,
-    margin: 10,
-    height: 160,
-  },
-});
+const ImageContainer = styled.ImageBackground`
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 250px;
+  height: 350px;
+`;
+
+const Container = styled.View`
+  background-color: white;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 10px;
+  width: 230px;
+  height: 180px;
+  top: 140px;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.198);
+  shadow-radius: 5px;
+`;
+
+const Header = styled.View`
+  justify-content: center;
+  width: 100px;
+  height: 20px;
+  background-color: #ffda9c;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
+
+const NoTag = styled.View`
+  flex: 1;
+  top: 15px;
+  margin-top: 5px;
+  align-items: center;
+`;
+
+const TitleContainer = styled.View`
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom: 5px;
+`;
+
+const Area = styled.Text`
+  font-weight: 600;
+  color: #ffa44a;
+  text-align: center;
+`;
+
+const TagsContainer = styled.View`
+  flex: 2;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 export default MealGrid;

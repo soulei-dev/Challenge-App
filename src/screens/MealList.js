@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import Copyright from "../components/Copyright";
 import useAxios from "../../hooks/useAxios";
 import SearchInput from "../components/SearchInput";
@@ -61,7 +61,7 @@ const MealList = (props) => {
           {error && error.message}
           {/* Component to render a list of meals */}
           {data && (
-            <FlatListÒ
+            <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"

@@ -1,16 +1,14 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { View } from "react-native";
+import styled from "styled-components";
 
 const Input = ({ onChangeText, value, placeholder, label, onBlur }) => {
-  const { inputStyle, labelStyle } = styles;
-
   return (
     <View style={{ width: "70%" }}>
-      <Text style={labelStyle}>{label}</Text>
+      <Label>{label}</Label>
 
-      <TextInput
+      <InputStyle
         placeholder={placeholder}
-        style={inputStyle}
         value={value}
         onBlur={onBlur}
         onChangeText={onChangeText}
@@ -19,18 +17,16 @@ const Input = ({ onChangeText, value, placeholder, label, onBlur }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  labelStyle: {
-    fontWeight: "600",
-    color: "#F9A826",
-  },
-  inputStyle: {
-    borderWidth: 1,
-    borderRadius: 50,
-    borderColor: "#C7C7C7",
-    padding: 8,
-    margin: 10,
-  },
-});
+const Label = styled.Text`
+  font-weight: 600;
+  color: #f9a826;
+`;
+
+const InputStyle = styled.TextInput`
+  border: 1px solid #c7c7c7;
+  border-radius: 50px;
+  padding: 8px;
+  margin: 10px;
+`;
 
 export default Input;

@@ -1,41 +1,42 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import styled from "styled-components";
 
 const SearchInput = ({ placeholder, onChangeText, value }) => {
-  const { input, searchSection, searchIcon } = styles;
+  const { searchIcon } = styles;
   return (
-    <View style={searchSection}>
+    <SearchSection>
       <AntDesign name="search1" size={20} color="#C7C7C7" style={searchIcon} />
-      <TextInput
+      <Input
         round={true}
         placeholder={placeholder}
-        style={input}
         onChangeText={onChangeText}
         value={value}
         autoCapitalize="none"
         autoCorrect={false}
       />
-    </View>
+    </SearchSection>
   );
 };
 
+const SearchSection = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+`;
+
+const Input = styled.TextInput`
+  flex: 1;
+  width: 70%;
+  border: 1px solid #c7c7c7;
+  padding: 8px;
+  margin: 10px;
+  border-radius: 50px;
+`;
+
 const styles = StyleSheet.create({
-  searchSection: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 20,
-  },
-  input: {
-    flex: 1,
-    width: "70%",
-    borderWidth: 1,
-    borderRadius: 50,
-    borderColor: "#C7C7C7",
-    padding: 8,
-    margin: 10,
-  },
   searchIcon: {
     position: "absolute",
     bottom: 38,
